@@ -1,6 +1,6 @@
-# Liga-MT
+# Liga Młodych talentów
 
-⚽ ⚽ ⚽ Liga Młodych Talentów (The Young Talent League) is a football competition which takes place across six locations in Poland.  Matches take place every fortnight over five rounds. The winter season came to an end last weekend, with just under 600 teams competing in almost 4,500 matches across 23 leagues. 
+⚽ ⚽ ⚽ [Liga Młodych Talentów (The Young Talent League)](https://ligamt.pl/) is a football competition which takes place across six locations in Poland.  Matches take place every fortnight over five rounds. The winter season came to an end last weekend, with just under 600 teams competing in almost 4,500 matches across 23 leagues. 
 Results and league standings are currently maintained in Google Sheets, with a publicly available URL for each city. ⚽ ⚽ ⚽
 
 ## Project Scope
