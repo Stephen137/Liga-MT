@@ -57,5 +57,16 @@ def calculate_league_table(city, category):
 
     # Save file
     output_path = f"{output_dir}/{city}_league_table_{safe_category}.csv"
-    league_table.to_csv(output_path, index=False)       
+    league_table.to_csv(output_path, index=False) 
+
+# List of cities and categories to process
+cities = ["gdansk", "warsaw", "wroclaw", "krakow", "poznan", "slask"]
+categories = ["2010/2011", "2012/2013", "2012/2014", "2014/2015", "2016/2017", "2018/2019"]
+
+# Process all cities and categories dynamically
+for city in cities:
+    for category in categories:
+        calculate_league_table(city, category)
+
+print("League standings for all cities have been collated and saved locally as CSV files.")
    
