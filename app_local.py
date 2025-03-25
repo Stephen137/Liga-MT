@@ -71,7 +71,7 @@ def main():
     """, unsafe_allow_html=True)
 
     # App title
-    st.title("Liga MT - Sezon Zimowy")
+    st.title("Liga Młodych Talentów #ZIMA2025")
     st.header("by Stephen Barrie")
 
     # Sidebar filters - always visible
