@@ -80,6 +80,10 @@ def main():
     selected_age = st.sidebar.selectbox("Wybierz kategorię wiekową", sorted(df["category"].unique()))
     df = df[df["category"] == selected_age]
 
+    # Get all teams for the selected city and age group for sidebar
+    all_teams = ["Wszystkie Drużyny"] + sorted(pd.unique(df[["home_team", "away_team"]].values.ravel("K")))
+    selected_team = st.sidebar.selectbox("Wybierz drużynę", all_teams)
+
     # Get unique match dates for selected city and age group
     unique_dates = sorted(df['date'].dt.date.unique(), reverse=True)
     if len(unique_dates) == 0:
@@ -130,9 +134,6 @@ def main():
             index=0  # Default to most recent date
         )
         
-        all_teams = ["Wszystkie Drużyny"] + sorted(pd.unique(df[["home_team", "away_team"]].values.ravel("K")))
-        selected_team = st.selectbox("Wybierz drużynę", all_teams)
-        
         # Filter by date
         if selected_date_str == "Wszystkie daty":
             results_df = df.copy()
@@ -142,32 +143,6 @@ def main():
         
         # Filter by team if needed
         if selected_team != "Wszystkie Drużyny":
-
-             # Custom CSS for alternating every three rows
-            st.markdown(
-                """
-                <style>
-                /* Alternating every three rows */
-                .stMarkdown table tr:nth-child(6n+1),
-                .stMarkdown table tr:nth-child(6n+2),
-                .stMarkdown table tr:nth-child(6n+3) {         
-    
-                    background-color: #2E4E6F; /* Darker blue for the first six rows */
-                }
-                .stMarkdown table tr:nth-child(6n+4),
-                .stMarkdown table tr:nth-child(6n+5),
-                .stMarkdown table tr:nth-child(6n+6) {
-              
-                    background-color: #1C2E4A; /* Lighter blue for the next six rows */
-                }
-                .stMarkdown table th { background-color: #00172B; color: white; }
-                .stMarkdown table td { color: white; }
-                </style>
-                """,
-                unsafe_allow_html=True,
-            )                
-
-            
             results_df = results_df[
                 (results_df["home_team"] == selected_team) | 
                 (results_df["away_team"] == selected_team)
@@ -201,6 +176,27 @@ def main():
                              .to_html(escape=False))
                 st.markdown(html_table, unsafe_allow_html=True)
             else:
+                # Custom CSS for alternating every three rows when a specific team is selected
+                st.markdown(
+                    """
+                    <style>
+                    /* Alternating every three rows */
+                    .stMarkdown table tr:nth-child(6n+1),
+                    .stMarkdown table tr:nth-child(6n+2),
+                    .stMarkdown table tr:nth-child(6n+3) {         
+                        background-color: #2E4E6F; /* Darker blue for the first three rows */
+                    }
+                    .stMarkdown table tr:nth-child(6n+4),
+                    .stMarkdown table tr:nth-child(6n+5),
+                    .stMarkdown table tr:nth-child(6n+6) {
+                        background-color: #1C2E4A; /* Lighter blue for the next three rows */
+                    }
+                    .stMarkdown table th { background-color: #00172B; color: white; }
+                    .stMarkdown table td { color: white; }
+                    </style>
+                    """,
+                    unsafe_allow_html=True,
+                )
                 st.markdown(results_display.to_html(escape=False), unsafe_allow_html=True)
 
 if __name__ == "__main__":
